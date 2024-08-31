@@ -1,0 +1,978 @@
+{
+  "info": {
+    "name": "ETRM2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "bruno",
+      "event": []
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/auth/login/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"nrg_admin\",\n  \"password\": \"nrg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Me",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/auth/me/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Login - SecretKey",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/auth/login/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"nrg_admin\",\n  \"password\": \"nrg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/auth/logout/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Change password",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/auth/change_password/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Broker",
+      "item": [
+        {
+          "name": "Get all",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/brokers",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/brokers/1",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deals",
+      "item": [
+        {
+          "name": "Create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"TEST-001\",\n  \"trade_date\": \"2024-08-30T10:27:30.587Z\",\n  \"status\": 0,\n  \"proposed_to\": 0,\n  \"sense\": 1,\n  \"volume\": 100,\n  \"fixed_price\": 9,\n  \"counterparty\": 2,\n  \"commodity_group\": 1,\n  \"broker\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/6db33b12-1b61-4cb3-8e68-a09cb638204c",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/6db33b12-1b61-4cb3-8e68-a09cb638204c/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"TEST-UPDATED\",\n  \"trade_date\": \"2024-08-30T10:27:30.587Z\",\n  \"status\": 0,\n  \"proposed_to\": 0,\n  \"sense\": 1,\n  \"volume\": 100,\n  \"fixed_price\": 9,\n  \"counterparty\": 2,\n  \"commodity_group\": 1,\n  \"broker\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get all",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/?scenario=datatable",
+              "host": [],
+              "path": [],
+              "query": [
+                {
+                  "key": "scenario",
+                  "value": "datatable"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/6db33b12-1b61-4cb3-8e68-a09cb638204c",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Filter",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/?scenario=datatable",
+              "host": [],
+              "path": [],
+              "query": [
+                {
+                  "key": "scenario",
+                  "value": "datatable"
+                }
+              ],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get all datatable",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/?scenario=datatable",
+              "host": [],
+              "path": [],
+              "query": [
+                {
+                  "key": "scenario",
+                  "value": "datatable"
+                }
+              ],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Commodity Group",
+      "item": [
+        {
+          "name": "Get all",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/cmd_group",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/cmd_group/1",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/contacts/1",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/contacts/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Contact_test\",\n  \"email\": \"test@nrgconsulting.es\",\n  \"phone\": \"+34 616052797\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get all",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/contacts",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/contacts/1",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Contact1_updated\",\n  \"email\": \"test@nrgconsulting.es\",\n  \"phone\": \"+34 616052797\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/contacts/1",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Principal",
+      "item": [
+        {
+          "name": "Get all",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/principal",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/principal/1",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Counterparty",
+      "item": [
+        {
+          "name": "Get all",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/counterparties",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/counterparties/2",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Create",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/counterparties/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"about\": {\n    \"description\": \"Counterparty description\",\n    \"address\": \"Counterparty address\",\n    \"phone\": \"Counterparty phone\"\n  },\n  \"name\": \"CTP_Created\",\n  \"type\": 1,\n  \"cif\": \"3333333A\",\n  \"contacts\": [\n    2\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update",
+          "event": [],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/counterparties/2/",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"about\": {\n    \"description\": \"Counterparty description\",\n    \"address\": \"Counterparty address\",\n    \"phone\": \"Counterparty phone\"\n  },\n  \"name\": \"CTP_UPDATED\",\n  \"type\": 1,\n  \"cif\": \"47574572A\",\n  \"contacts\": [\n    3\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/deals/counterparties/3",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Choices",
+      "item": [
+        {
+          "name": "Get one",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token {{token}}",
+                "disabled": false,
+                "type": "default"
+              },
+              {
+                "key": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "disabled": true,
+                "type": "default"
+              }
+            ],
+            "description": "",
+            "url": {
+              "raw": "{{BASE_URL}}/choices/action_status",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "secret_key",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

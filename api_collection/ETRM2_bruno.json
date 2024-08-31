@@ -1,0 +1,1091 @@
+{
+  "name": "ETRM2",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "Auth",
+      "items": [
+        {
+          "type": "http",
+          "name": "Login",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/auth/login/",
+            "method": "POST",
+            "headers": [],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"nrg_admin\",\n  \"password\": \"nrg\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Me",
+          "seq": 3,
+          "request": {
+            "url": "{{BASE_URL}}/auth/me/",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Login - SecretKey",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/auth/login/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": true
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"nrg_admin\",\n  \"password\": \"nrg\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Logout",
+          "seq": 4,
+          "request": {
+            "url": "{{BASE_URL}}/auth/logout/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Change password",
+          "seq": 5,
+          "request": {
+            "url": "{{BASE_URL}}/auth/change_password/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Broker",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get all",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/deals/brokers",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/deals/brokers/1",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Deals",
+      "items": [
+        {
+          "type": "http",
+          "name": "Create",
+          "seq": 5,
+          "request": {
+            "url": "{{BASE_URL}}/deals/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"code\": \"TEST-001\",\n  \"trade_date\": \"2024-08-30T10:27:30.587Z\",\n  \"status\": 0,\n  \"proposed_to\": 0,\n  \"sense\": 1,\n  \"volume\": 100,\n  \"fixed_price\": 9,\n  \"counterparty\": 2,\n  \"commodity_group\": 1,\n  \"broker\": 1\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete",
+          "seq": 6,
+          "request": {
+            "url": "{{BASE_URL}}/deals/6db33b12-1b61-4cb3-8e68-a09cb638204c",
+            "method": "DELETE",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update",
+          "seq": 7,
+          "request": {
+            "url": "{{BASE_URL}}/deals/6db33b12-1b61-4cb3-8e68-a09cb638204c/",
+            "method": "PUT",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"code\": \"TEST-UPDATED\",\n  \"trade_date\": \"2024-08-30T10:27:30.587Z\",\n  \"status\": 0,\n  \"proposed_to\": 0,\n  \"sense\": 1,\n  \"volume\": 100,\n  \"fixed_price\": 9,\n  \"counterparty\": 2,\n  \"commodity_group\": 1,\n  \"broker\": 1\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get all",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/deals/?scenario=datatable",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [
+              {
+                "name": "scenario",
+                "value": "datatable",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 3,
+          "request": {
+            "url": "{{BASE_URL}}/deals/6db33b12-1b61-4cb3-8e68-a09cb638204c",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Filter",
+          "seq": 4,
+          "request": {
+            "url": "{{BASE_URL}}/deals/?scenario=datatable",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [
+              {
+                "name": "scenario",
+                "value": "datatable",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get all datatable",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/deals/?scenario=datatable",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [
+              {
+                "name": "scenario",
+                "value": "datatable",
+                "type": "query",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Commodity Group",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get all",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/deals/cmd_group",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/deals/cmd_group/1",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Contact",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/deals/contacts/1",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create",
+          "seq": 3,
+          "request": {
+            "url": "{{BASE_URL}}/deals/contacts/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Contact_test\",\n  \"email\": \"test@nrgconsulting.es\",\n  \"phone\": \"+34 616052797\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get all",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/deals/contacts",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update",
+          "seq": 4,
+          "request": {
+            "url": "{{BASE_URL}}/deals/contacts/1",
+            "method": "PUT",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"name\": \"Contact1_updated\",\n  \"email\": \"test@nrgconsulting.es\",\n  \"phone\": \"+34 616052797\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete",
+          "seq": 5,
+          "request": {
+            "url": "{{BASE_URL}}/deals/contacts/1",
+            "method": "DELETE",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Principal",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get all",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/deals/principal",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/deals/principal/1",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Counterparty",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get all",
+          "seq": 1,
+          "request": {
+            "url": "{{BASE_URL}}/deals/counterparties",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/deals/counterparties/2",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Create",
+          "seq": 3,
+          "request": {
+            "url": "{{BASE_URL}}/deals/counterparties/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"about\": {\n    \"description\": \"Counterparty description\",\n    \"address\": \"Counterparty address\",\n    \"phone\": \"Counterparty phone\"\n  },\n  \"name\": \"CTP_Created\",\n  \"type\": 1,\n  \"cif\": \"3333333A\",\n  \"contacts\": [\n    2\n  ]\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update",
+          "seq": 4,
+          "request": {
+            "url": "{{BASE_URL}}/deals/counterparties/2/",
+            "method": "PUT",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"about\": {\n    \"description\": \"Counterparty description\",\n    \"address\": \"Counterparty address\",\n    \"phone\": \"Counterparty phone\"\n  },\n  \"name\": \"CTP_UPDATED\",\n  \"type\": 1,\n  \"cif\": \"47574572A\",\n  \"contacts\": [\n    3\n  ]\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete",
+          "seq": 5,
+          "request": {
+            "url": "{{BASE_URL}}/deals/counterparties/3",
+            "method": "DELETE",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Choices",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get one",
+          "seq": 2,
+          "request": {
+            "url": "{{BASE_URL}}/choices/action_status",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Token {{token}}",
+                "enabled": true
+              },
+              {
+                "name": "SECRET-KEY",
+                "value": "{{secret_key}}",
+                "enabled": false
+              }
+            ],
+            "params": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "auth": {
+              "mode": "none"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "siVTYcYo4pWrMHABASadQ",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "BASE_URL",
+          "value": "http://127.0.0.1:8000/api",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "token",
+          "value": "5a64ee49739d51de533512e9f6fbb10f95ee80b2",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        },
+        {
+          "name": "secret_key",
+          "value": "317f512a635fc0d702c3033e9b760eb5736d77d0",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "ETRM2 - Dev"
+    }
+  ],
+  "brunoConfig": {
+    "version": "1",
+    "name": "ETRM2",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
+  }
+}
