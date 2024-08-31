@@ -43,3 +43,45 @@ Otros aspectos que serán valorados de manera positiva son:
 Esta API de prueba ha sido montada sobre *Python* usando *DRF 3.15.2* y dispone de documentación relacionada a cada acción 
 tanto en formato [*swagger*](http://178.33.249.178:8002/api/schema/swagger'ui/) como [*redoc*](http://178.33.249.178:8002/api/schema/redoc/). 
 
+En la carpeta `api_collection` puede encontrar todos los endpoints de la API en formato JSON para importar en 
+Postman, Bruno u otra herramienta que acepte este estándar.
+
+A continuación se detallan un diagrama del modelo E/R
+![ER](resources/ER.png)
+
+### Auth
+Para poder realizar la autenticación en la API, se debe realizar una petición POST a la ruta `/api/login/` con los 
+siguientes datos:
+```json
+{
+	"username": "admin",
+	"password": "admin"
+}
+```
+
+Los usuarios definidos son los siguientes:
+```json
+{
+	"username": "kelsier_admin",
+	"password": "nrg"
+}
+```
+```json
+{
+	"username": "elend_standard",
+	"password": "user"
+}
+```
+```json
+{
+	"username": "vin_secret_key",
+	"password": "user"
+}
+```
+
+Si no dispone de tiempo para implementar la autenticación, puede usar el siguiente token para realizar las peticiones:
+```json
+{
+	"SECRET-KEY": "35952d18-bd45-4099-8a76-d987315b094e"
+}
+```
