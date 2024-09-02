@@ -41,7 +41,7 @@ Otros aspectos que serán valorados de manera positiva son:
 
 ### API
 Esta API de prueba ha sido montada sobre *Python* usando *DRF 3.15.2* y dispone de documentación relacionada a cada acción 
-tanto en formato [*swagger*](http://178.33.249.178:8002/api/schema/swagger'ui/) como [*redoc*](http://178.33.249.178:8002/api/schema/redoc/). 
+tanto en formato [*swagger*](http://178.33.249.178:8002/api/schema/swagger-ui/) como [*redoc*](http://178.33.249.178:8002/api/schema/redoc/). 
 
 En la carpeta `api_collection` puede encontrar todos los endpoints de la API en formato JSON para importar en 
 Postman, Bruno u otra herramienta que acepte este estándar.
