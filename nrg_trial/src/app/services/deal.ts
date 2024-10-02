@@ -28,7 +28,6 @@ export const getDeals = async (token: string, params?: string) => {
   }
 };
 
-
 export const getDealById = async (token: string, id: string) => {
   const url = `${BASE_URL}${id}/`; // Construye la URL con el ID
 

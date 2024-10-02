@@ -35,3 +35,25 @@ export const loginUser = async (username: string, password: string): Promise<Use
 
   return data as User; // Retorna el usuario si la autenticación es exitosa
 };
+
+
+// Función para cambiar contraseña, enviando solo la nueva contraseña
+export const changePassword = async (newPassword: string, accessToken: string): Promise<void> => {
+  const res = await fetch(`${API_URL}/change_password/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Token ${accessToken}`, // Incluye el token de acceso en los headers
+    },
+    body: JSON.stringify({
+      password: newPassword, // Envía solo la nueva contraseña en el cuerpo
+    }),
+  });
+
+  if (!res.ok) {
+    const errorData: ErrorResponse = await res.json();
+    throw new Error(errorData.detail || "Error desconocido al cambiar la contraseña");
+  }
+};
+
+

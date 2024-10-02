@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getDeals, getDealById } from '../../services/deal';
+import { getDeals } from '../../services/deal';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]/route'; // Asegúrate de que esta importación sea correcta
 
@@ -23,21 +23,3 @@ export async function GET(req: Request) {
   }
 }
 
-// Nueva ruta para obtener un deal por ID
-export async function GET_DEAL_BY_ID(req: Request, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions); // Obtiene la sesión
-
-  if (!session || !session.accessToken) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const { id } = params; // Obtiene el ID del parámetro de ruta
-
-  try {
-    const deal = await getDealById(session.accessToken, id); // Llama a la función para obtener el deal
-    return NextResponse.json(deal); // Devuelve el deal
-  } catch (error) {
-    console.error('Error fetching deal:', error);
-    return NextResponse.json({ error: 'Failed to fetch deal' }, { status: 500 });
-  }
-}
