@@ -2,7 +2,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
-import DealsTable from '../components/DealsTable';
+import DealsTable from '../components/DealsTable'; // Importa el componente de tabla
+import DealsFilters from '../components/DealsFilters'; // Importa el componente de filtros
+import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
+import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
 
 interface Deal {
   id: string;
@@ -23,9 +26,13 @@ interface Deal {
 }
 
 export default function DealsPage() {
+  const { currentLang } = useLanguage(); // Obtén el idioma actual
+  const translations = useTranslations(currentLang); // Obtén las traducciones
+
   const [deals, setDeals] = useState<Deal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
   const [filters, setFilters] = useState({
     code: '',
     status: '',
@@ -42,10 +49,11 @@ export default function DealsPage() {
 
   useEffect(() => {
     const fetchDeals = async () => {
+      setLoading(true);
       const session = await getSession();
 
       if (!session || !session.accessToken) {
-        setError('No estás autorizado');
+        setError(translations.error + ' No estás autorizado');
         setLoading(false);
         return;
       }
@@ -59,7 +67,7 @@ export default function DealsPage() {
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`Error al obtener los deals: ${errorText}`);
+          throw new Error(`${translations.error} ${errorText}`);
         }
 
         const data = await response.json();
@@ -73,7 +81,7 @@ export default function DealsPage() {
     };
 
     fetchDeals();
-  }, []);
+  }, [translations]); // Asegúrate de que las traducciones se actualicen al cambiar el idioma
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -101,108 +109,21 @@ export default function DealsPage() {
   });
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div>{translations.loading}</div>; // Mensaje de carga traducido
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>{translations.error}: {error}</div>; // Mensaje de error traducido
   }
 
   return (
     <div>
-      <h1>Lista de Deals</h1>
+      <h1>{translations.contracts}</h1>
 
       {/* Filtros */}
-      <div className="mb-4">
-        <input
-          type="text"
-          name="code"
-          value={filters.code}
-          onChange={handleFilterChange}
-          placeholder="Código"
-          className="border border-gray-300 rounded px-2 py-1 mr-2"
-        />
-        <select name="status" value={filters.status} onChange={handleFilterChange} className="border border-gray-300 rounded px-2 py-1 mr-2">
-          <option value="">Estado</option>
-          <option value="0">Inactive</option>
-          <option value="1">Unverified</option>
-          <option value="2">Verified</option>
-        </select>
-        <select name="proposed_to" value={filters.proposed_to} onChange={handleFilterChange} className="border border-gray-300 rounded px-2 py-1 mr-2">
-          <option value="">Propuesto a</option>
-          <option value="0">None</option>
-          <option value="1">Amendment</option>
-          <option value="2">Deleted</option>
-        </select>
-        <select name="sense" value={filters.sense} onChange={handleFilterChange} className="border border-gray-300 rounded px-2 py-1 mr-2">
-          <option value="">Sentido</option>
-          <option value="1">Buy</option>
-          <option value="2">Sell</option>
-        </select>
-      </div>
+      <DealsFilters filters={filters} onFilterChange={handleFilterChange} />
 
-      {/* Filtros de Fechas */}
-      <div className="mb-4">
-        <h2>Filtros de Fechas</h2>
-        <label className="mr-2">Fecha de Comercio:</label>
-        <input
-          type="date"
-          name="trade_date_start"
-          value={filters.trade_date_start}
-          onChange={handleFilterChange}
-          className="border border-gray-300 rounded px-2 py-1 mr-2"
-          placeholder="Desde"
-        />
-        <input
-          type="date"
-          name="trade_date_end"
-          value={filters.trade_date_end}
-          onChange={handleFilterChange}
-          className="border border-gray-300 rounded px-2 py-1 mr-2"
-          placeholder="Hasta"
-        />
-
-        <div className="mt-2">
-          <label className="mr-2">Creación:</label>
-          <input
-            type="date"
-            name="created_at_start"
-            value={filters.created_at_start}
-            onChange={handleFilterChange}
-            className="border border-gray-300 rounded px-2 py-1 mr-2"
-            placeholder="Desde"
-          />
-          <input
-            type="date"
-            name="created_at_end"
-            value={filters.created_at_end}
-            onChange={handleFilterChange}
-            className="border border-gray-300 rounded px-2 py-1 mr-2"
-            placeholder="Hasta"
-          />
-        </div>
-
-        <div className="mt-2">
-          <label className="mr-2">Actualización:</label>
-          <input
-            type="date"
-            name="updated_at_start"
-            value={filters.updated_at_start}
-            onChange={handleFilterChange}
-            className="border border-gray-300 rounded px-2 py-1 mr-2"
-            placeholder="Desde"
-          />
-          <input
-            type="date"
-            name="updated_at_end"
-            value={filters.updated_at_end}
-            onChange={handleFilterChange}
-            className="border border-gray-300 rounded px-2 py-1 mr-2"
-            placeholder="Hasta"
-          />
-        </div>
-      </div>
-
+      {/* Tabla de Deals */}
       <DealsTable deals={filteredDeals} />
     </div>
   );

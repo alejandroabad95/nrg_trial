@@ -1,6 +1,8 @@
-// app/deals/DealsRow.tsx
-'use client';
-import Link from 'next/link';
+// components/DealsRow.tsx
+'use client'; // Asegúrate de que este componente sea un cliente
+
+import React from 'react';
+import { useRouter } from 'next/navigation'; // Asegúrate de importar desde next/navigation
 
 interface Deal {
   id: string;
@@ -11,59 +13,41 @@ interface Deal {
   sense: number;
   volume: number;
   fixed_price: number;
-  is_billing: number;
-  is_deleted: boolean;
-  created_at: string;
-  updated_at: string;
-  counterparty: number; // Solo el ID
-  commodity_group: number; // Solo el ID
-  broker: number; // Solo el ID
 }
 
 interface DealsRowProps {
   deal: Deal;
 }
 
-const statusMap: { [key: number]: string } = {
-  0: "Inactive",
-  1: "Unverified",
-  2: "Verified",
-};
-
-const proposedToMap: { [key: number]: string } = {
-  0: "None",
-  1: "Amendment",
-  2: "Deleted",
-};
-
-const senseMap: { [key: number]: string } = {
-  1: "Buy",
-  2: "Sell",
-};
-
 const DealsRow: React.FC<DealsRowProps> = ({ deal }) => {
+  const router = useRouter(); // Inicializa el router
+
+  // Etiquetas de estado y sentido
+  const statusLabels: { [key: number]: string } = {
+    0: 'Inactivo',
+    1: 'No Verificado',
+    2: 'Verificado',
+  };
+
+  const senseLabels: { [key: number]: string } = {
+    1: 'Compra',
+    2: 'Venta',
+  };
+
+  const handleRowClick = () => {
+    router.push(`/deals/${deal.id}`); // Redirige a la página de detalles del deal
+  };
+
   return (
-    <tr className="hover:bg-gray-50">
-      <td className="px-6 py-4 border-b border-gray-200">
-        <Link href={`/deals/${deal.id}`}>{deal.id}</Link>
-      </td>
-      <td className="px-6 py-4 border-b border-gray-200">{deal.code}</td>
-      <td className="px-6 py-4 border-b border-gray-200">
-        {new Date(deal.trade_date).toLocaleDateString()}
-      </td>
-      <td className="px-6 py-4 border-b border-gray-200">{statusMap[deal.status]}</td>
-      <td className="px-6 py-4 border-b border-gray-200">{proposedToMap[deal.proposed_to]}</td>
-      <td className="px-6 py-4 border-b border-gray-200">{senseMap[deal.sense]}</td>
-      <td className="px-6 py-4 border-b border-gray-200">{deal.volume}</td>
-      <td className="px-6 py-4 border-b border-gray-200">{deal.fixed_price}</td>
-      <td className="px-6 py-4 border-b border-gray-200">{deal.is_billing ? 'Sí' : 'No'}</td>
-      <td className="px-6 py-4 border-b border-gray-200">{deal.is_deleted ? 'Sí' : 'No'}</td>
-      <td className="px-6 py-4 border-b border-gray-200">
-        {new Date(deal.created_at).toLocaleDateString()}
-      </td>
-      <td className="px-6 py-4 border-b border-gray-200">
-        {new Date(deal.updated_at).toLocaleDateString()}
-      </td>
+    <tr className="border-b hover:bg-gray-100 cursor-pointer" onClick={handleRowClick}>
+      <td className="p-2">{deal.id}</td> {/* ID */}
+      <td className="p-2">{deal.code}</td> {/* Código */}
+      <td className="p-2">{new Date(deal.trade_date).toLocaleDateString()}</td> {/* Fecha de Comercio */}
+      <td className="p-2">{statusLabels[deal.status]}</td> {/* Estado */}
+      <td className="p-2">{deal.proposed_to}</td> {/* Propuesto a */}
+      <td className="p-2">{senseLabels[deal.sense]}</td> {/* Sentido */}
+      <td className="p-2">{deal.volume}</td> {/* Volumen */}
+      <td className="p-2">{deal.fixed_price}</td> {/* Precio Fijo */}
     </tr>
   );
 };

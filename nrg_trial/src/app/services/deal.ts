@@ -3,8 +3,6 @@ const BASE_URL = "http://178.33.249.178:8002/api/deals/";
 export const getDeals = async (token: string, params?: string) => {
   const url = params ? `${BASE_URL}?${params}` : BASE_URL;
 
-  console.log("Fetching deals from URL:", url);
-
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -31,7 +29,6 @@ export const getDeals = async (token: string, params?: string) => {
 export const getDealById = async (token: string, id: string) => {
   const url = `${BASE_URL}${id}/`; // Construye la URL con el ID
 
-  console.log("Fetching deal from URL:", url);
 
   try {
     const response = await fetch(url, {

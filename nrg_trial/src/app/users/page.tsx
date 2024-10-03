@@ -1,6 +1,10 @@
-"use client";
+"use client"; // Asegúrate de que este archivo sea un componente de cliente
+
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
+import UsersTable from '../components/UsersTable'; // Asegúrate de que la ruta sea correcta
+import { useLanguage } from '../context/LanguageContext'; // Importa el contexto de lenguaje
+import { useTranslations } from '../../utils/i18n'; // Asegúrate de que esta ruta sea correcta
 
 interface User {
   id: string;          // El ID del usuario, es un string que representa un UUID
@@ -9,8 +13,10 @@ interface User {
   is_staff: boolean;   // Un booleano que indica si el usuario tiene permisos de personal administrativo
 }
 
-
 export default function UsersPage() {
+  const { currentLang } = useLanguage(); // Obtiene el idioma actual desde el contexto
+  const translations = useTranslations(currentLang); // Obtiene las traducciones según el idioma actual
+
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,15 +24,13 @@ export default function UsersPage() {
   useEffect(() => {
     const fetchUsers = async () => {
       const session = await getSession();
-      console.log('Session:', session); // Log de sesión para verificar
 
       if (!session || !session.accessToken) {
-        setError('No estás autorizado');
+        setError(translations.notAuthorized || 'No estás autorizado');
         setLoading(false);
         return;
       }
 
-      console.log("Access Token:", session.accessToken); // Log del token
 
       try {
         const response = await fetch('/api/users', {
@@ -38,11 +42,11 @@ export default function UsersPage() {
         if (!response.ok) {
           const errorText = await response.text(); // Captura el texto de error
           console.error("Error Response:", errorText); // Log del error
-          throw new Error(`Error al obtener los users: ${errorText}`);
+          throw new Error(`${translations.fetchError}: ${errorText}`); // Añade el mensaje de error traducido
         }
 
         const data = await response.json();
-        setUsers(data); // Almacena los users en el estado
+        setUsers(data); // Almacena los usuarios en el estado
       } catch (error) {
         console.error("Error fetching users:", error); // Log del error
         setError(error instanceof Error ? error.message : 'Error desconocido');
@@ -52,39 +56,21 @@ export default function UsersPage() {
     };
 
     fetchUsers();
-  }, []);
+  }, [translations]); // Añade translations como dependencia
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div className="text-center">{translations.loading || 'Cargando...'}</div>;
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="text-red-500 text-center">{translations.error || 'Error: ' + error}</div>;
   }
 
   return (
-    <div>
-      <h1>Usuarios</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre de usuario</th>
-            <th>Grupo</th>
-            <th>¿Es Staff?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((User) => (
-            <tr key={User.id}>
-              <td>{User.id}</td>
-              <td>{User.username}</td>
-              <td>{User.groups}</td>
-              <td>{User.is_staff}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">{translations.users || 'Usuarios'}</h1>
+      <UsersTable users={users} translations={translations} /> {/* Pasamos las traducciones a la tabla */}
     </div>
   );
 }
+

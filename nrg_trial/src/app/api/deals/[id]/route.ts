@@ -13,7 +13,6 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 
   const { id } = params; // Obtiene el ID del parámetro de ruta
 
-  console.log("ID recibido:", id); // Para verificar el ID
 
   try {
     const deal = await getDealById(session.accessToken, id); // Llama a la función para obtener el deal

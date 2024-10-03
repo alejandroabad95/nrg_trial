@@ -8,9 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+       colors: {
+        paleYellow: '#FEFAE0',    // Amarillo pálido
+        lightGreen: '#606C38',    // Verde
+        darkGreen: '#283618',     // Verde oscuro
+        lightOrange: '#DDA15E',   // Naranja claro
+        darkOrange: '#BC6C25',    // Naranja oscuro
       },
     },
   },

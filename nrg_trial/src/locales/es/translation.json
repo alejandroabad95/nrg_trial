@@ -1,4 +1,74 @@
 {
+
+  "contracts": "Contratos",
+  "counterparties": "Contrapartidas",
+  "users": "Usuarios",
+  "principals": "Directores",
+  "myProfile": "Mi Perfil",
+  "changePassword": "Cambiar Contraseña",
+  "logout": "Logout",
+  "login": "Login",
+  "languageSwitch": "Cambiar idioma",
+
+
   "welcome": "Bienvenido a ETRM2",
-  "welcomeDescription": "Con ETRM2, optimiza la gestión de contratos de commodities de manera eficiente y efectiva. Nuestra plataforma permite el seguimiento del riesgo de mercado, la optimización de datos y la minimización de pérdidas, proporcionando un soporte esencial para las operaciones de trading energético."
+  "welcomeDescription": "Con ETRM2, optimiza la gestión de contratos de commodities de manera eficiente y efectiva. Nuestra plataforma permite el seguimiento del riesgo de mercado, la optimización de datos y la minimización de pérdidas, proporcionando un soporte esencial para las operaciones de trading energético.",
+
+
+
+
+  "loading": "Cargando...",
+  "error": "Error",
+  "notAuthorized": "No estás autorizado",
+
+
+
+  "filters": "Filtros",
+  "code": "Código",
+  "status": "Estado",
+  "proposed_to": "Propuesto a",
+  "sense": "Sentido",
+  "trade_date": "Fecha de Comercio",
+  "creation": "Creación",
+  "update": "Actualización",
+  "inactive": "Inactivo",
+  "unverified": "No Verificado",
+  "verified": "Verificado",
+  "none": "Ninguno",
+  "amendment": "Enmienda",
+  "deleted": "Eliminado",
+  "buy": "Compra",
+  "sell": "Venta",
+  "volume": "Volumen",
+  "fixed_price": "Precio Fijo",
+
+   "dealDetails": "Detalles del Deal", 
+  "isBilling": "Es Facturación?", 
+  "isDeleted": "Es Eliminado?", 
+  "measurementUnit": "Unidad de Medida",
+
+
+  "type":"tipo",
+
+  
+  "fetchError": "Error al obtener los usuarios",
+  "username": "Nombre de usuario",
+  "password": "Contraseña",
+  "group": "Grupo",
+  "isStaff": "¿Es Staff?",
+  "yes": "Sí",
+  "no": "No",
+
+
+
+  "name": "Nombre",
+  "shortName": "Nombre Corto",
+
+
+
+
+
+
+
+  "footer": "© ETRM2 todos los derechos reservados"
 }

@@ -13,10 +13,7 @@ export const getPrincipals = async (token: string) => {
         "Content-Type": "application/json",
       },
     });
-
-    // Log para verificar la respuesta de la API externa
-    console.log("Respuesta de la API externa:", response);
-
+    
     if (!response.ok) {
       const errorMessage = await response.text();
       console.error("Error Response:", errorMessage);

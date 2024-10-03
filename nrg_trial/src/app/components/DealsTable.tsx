@@ -1,6 +1,8 @@
-// app/deals/DealsTable.tsx
-'use client';
+// components/DealsTable.tsx
+import React from 'react';
 import DealsRow from './DealsRow';
+import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
+import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
 
 interface Deal {
   id: string;
@@ -11,13 +13,6 @@ interface Deal {
   sense: number;
   volume: number;
   fixed_price: number;
-  is_billing: number;
-  is_deleted: boolean;
-  created_at: string;
-  updated_at: string;
-  counterparty: number; // Solo el ID
-  commodity_group: number; // Solo el ID
-  broker: number; // Solo el ID
 }
 
 interface DealsTableProps {
@@ -25,32 +20,29 @@ interface DealsTableProps {
 }
 
 const DealsTable: React.FC<DealsTableProps> = ({ deals }) => {
+  const { currentLang } = useLanguage(); // Obtén el idioma actual
+  const translations = useTranslations(currentLang); // Obtén las traducciones
+
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full border-collapse border border-gray-200">
-        <thead>
-          <tr>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">ID</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Código</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Fecha de Comercio</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Estado</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Propuesto a</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Sentido</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Volumen</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Precio Fijo</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Es Facturación</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Es Eliminado</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Creado el</th>
-            <th className="px-6 py-3 border-b border-gray-200 text-left text-sm font-medium text-gray-500">Actualizado el</th>
-          </tr>
-        </thead>
-        <tbody>
-          {deals.map((deal) => (
-            <DealsRow key={deal.id} deal={deal} />
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <table className="min-w-full border border-gray-300">
+      <thead>
+        <tr className="bg-gray-200">
+          <th className="p-2">ID</th> {/* ID */}
+          <th className="p-2">{translations.code}</th> {/* Código */}
+          <th className="p-2">{translations.trade_date}</th> {/* Fecha de Comercio */}
+          <th className="p-2">{translations.status}</th> {/* Estado */}
+          <th className="p-2">{translations.proposed_to}</th> {/* Propuesto a */}
+          <th className="p-2">{translations.sense}</th> {/* Sentido */}
+          <th className="p-2">{translations.volume}</th> {/* Volumen */}
+          <th className="p-2">{translations.fixed_price}</th> {/* Precio Fijo */}
+        </tr>
+      </thead>
+      <tbody>
+        {deals.map(deal => (
+          <DealsRow key={deal.id} deal={deal} />
+        ))}
+      </tbody>
+    </table>
   );
 };
 

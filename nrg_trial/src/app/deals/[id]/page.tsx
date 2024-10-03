@@ -1,7 +1,8 @@
-// app/deals/[id]/page.tsx
 "use client";
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
+import { useLanguage } from '@/app/context/LanguageContext';
+import { useTranslations } from '../../../utils/i18n'; // Importa el hook de traducciones
 
 interface Deal {
   id: string;
@@ -17,7 +18,6 @@ interface Deal {
   created_at: string;
   updated_at: string;
   counterparty: {
-  
     name: string;
     type: number;
   };
@@ -35,24 +35,10 @@ interface DealDetailsPageProps {
   };
 }
 
-const statusMap: Record<number, string> = {
-  0: 'Inactivo',
-  1: 'No Verificado',
-  2: 'Verificado',
-};
-
-const proposedToMap: Record<number, string> = {
-  0: 'Ninguno',
-  1: 'Modificación',
-  2: 'Eliminado',
-};
-
-const senseMap: Record<number, string> = {
-  1: 'Compra',
-  2: 'Venta',
-};
-
 export default function DealDetailsPage({ params }: DealDetailsPageProps) {
+  const { currentLang } = useLanguage(); // Obtén el idioma actual
+  const translations = useTranslations(currentLang); // Obtén las traducciones
+
   const { id } = params; // Obtiene el ID del deal desde las props
   const [deal, setDeal] = useState<Deal | null>(null);
   const [loading, setLoading] = useState(true);
@@ -63,7 +49,7 @@ export default function DealDetailsPage({ params }: DealDetailsPageProps) {
       const session = await getSession();
 
       if (!session || !session.accessToken) {
-        setError('No estás autorizado');
+        setError(translations.notAuthorized); // Mensaje de error traducido
         setLoading(false);
         return;
       }
@@ -77,60 +63,60 @@ export default function DealDetailsPage({ params }: DealDetailsPageProps) {
 
         if (!response.ok) {
           const errorText = await response.text();
-          throw new Error(`Error al obtener el deal: ${errorText}`);
+          throw new Error(`${translations.error} ${errorText}`); // Mensaje de error traducido
         }
 
         const data = await response.json();
         setDeal(data);
       } catch (error) {
         console.error("Error fetching deal:", error);
-        setError(error instanceof Error ? error.message : 'Error desconocido');
+        setError(error instanceof Error ? error.message : translations.error); // Mensaje de error traducido
       } finally {
         setLoading(false);
       }
     };
 
     fetchDeal();
-  }, [id]);
+  }, [id, translations]); // Asegúrate de que las traducciones se actualicen al cambiar el idioma
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div>{translations.loading}</div>; // Mensaje de carga traducido
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>{translations.error}: {error}</div>; // Mensaje de error traducido
   }
 
   if (!deal) {
-    return <div>No se encontró el deal.</div>;
+    return <div>{translations.error}: {translations.notAuthorized}</div>; // Mensaje de no encontrado traducido
   }
 
   return (
     <div>
-      <h1>Detalles del Deal</h1>
+      <h1>{translations.dealDetails}</h1>
       <p>ID: {deal.id}</p>
-      <p>Código: {deal.code}</p>
-      <p>Fecha de Comercio: {new Date(deal.trade_date).toLocaleDateString()}</p>
-      <p>Estado: {statusMap[deal.status] || 'Desconocido'}</p>
-      <p>Propuesto a: {proposedToMap[deal.proposed_to] || 'Desconocido'}</p>
-      <p>Sentido: {senseMap[deal.sense] || 'Desconocido'}</p>
-      <p>Volumen: {deal.volume}</p>
-      <p>Precio Fijo: {deal.fixed_price}</p>
-      <p>Es Facturación: {deal.is_billing ? 'Sí' : 'No'}</p>
-      <p>Es Eliminado: {deal.is_deleted ? 'Sí' : 'No'}</p>
-      <p>Creado el: {new Date(deal.created_at).toLocaleDateString()}</p>
-      <p>Actualizado el: {new Date(deal.updated_at).toLocaleDateString()}</p>
+      <p>{translations.code}: {deal.code}</p>
+      <p>{translations.trade_date}: {new Date(deal.trade_date).toLocaleDateString()}</p>
+      <p>{translations.status}: {translations[deal.status === 0 ? 'inactive' : deal.status === 1 ? 'unverified' : 'verified']}</p>
+      <p>{translations.proposed_to}: {translations[deal.proposed_to === 0 ? 'none' : deal.proposed_to === 1 ? 'amendment' : 'deleted']}</p>
+      <p>{translations.sense}: {translations[deal.sense === 1 ? 'buy' : 'sell']}</p>
+      <p>{translations.volume}: {deal.volume}</p>
+      <p>{translations.fixed_price}: {deal.fixed_price}</p>
+      <p>{translations.isBilling}: {deal.is_billing ? translations.yes : translations.no}</p>
+      <p>{translations.isDeleted}: {deal.is_deleted ? translations.yes : translations.no}</p>
+      <p>{translations.creation}: {new Date(deal.created_at).toLocaleDateString()}</p>
+      <p>{translations.update}: {new Date(deal.updated_at).toLocaleDateString()}</p>
       
-      <h2>Contraparte</h2>
-      <p>Nombre: {deal.counterparty.name}</p>
-      <p>Tipo: {deal.counterparty.type}</p>
+      <h2>{translations.counterparties}</h2>
+      <p>{translations.name}: {deal.counterparty.name}</p>
+      <p>{translations.type}: {deal.counterparty.type}</p>
 
-      <h2>Grupo de Mercancías</h2>
-      <p>Nombre: {deal.commodity_group.name}</p>
-      <p>Nombre Corto: {deal.commodity_group.short_name}</p>
-      <p>Unidad de Medida: {deal.commodity_group.measurement_unit}</p>
+      <h2>{translations.commodityGroup}</h2>
+      <p>{translations.name}: {deal.commodity_group.name}</p>
+      <p>{translations.shortName}: {deal.commodity_group.short_name}</p>
+      <p>{translations.measurementUnit}: {deal.commodity_group.measurement_unit}</p>
 
-      <h2>Broker</h2>
+      <h2>{translations.broker}</h2>
       <p>{deal.broker}</p>
     </div>
   );

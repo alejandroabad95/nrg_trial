@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
+import PrincipalsTable from '../components/PrincipalsTable'; // Importa el componente de tabla
+import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
+import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
 
 interface Principal {
   id: string;
@@ -10,6 +13,9 @@ interface Principal {
 }
 
 export default function PrincipalsPage() {
+  const { currentLang } = useLanguage(); // Obtén el idioma actual
+  const translations = useTranslations(currentLang); // Obtén las traducciones
+
   const [principals, setPrincipals] = useState<Principal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,9 +26,6 @@ export default function PrincipalsPage() {
 
       try {
         const session = await getSession();
-        
-        // Log para comprobar la sesión en el cliente
-        console.log('Sesión en el cliente:', session);
 
         if (!session || !session.accessToken) {
           throw new Error('No estás autorizado o no se pudo obtener el token');
@@ -54,34 +57,17 @@ export default function PrincipalsPage() {
   }, []);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div>{translations.loading}</div>; // Mensaje de carga traducido
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>{translations.error}: {error}</div>; // Mensaje de error traducido
   }
 
   return (
-    <div>
-      <h1>Principals</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Nombre Corto</th>
-          </tr>
-        </thead>
-        <tbody>
-          {principals.map((principal) => (
-            <tr key={principal.id}>
-              <td>{principal.id}</td>
-              <td>{principal.name}</td>
-              <td>{principal.short_name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="container mx-auto max-w-4xl mt-10">
+      <h1 className="text-2xl font-bold mb-4">{translations.principals || 'Principals'}</h1>
+      <PrincipalsTable principals={principals} />
     </div>
   );
 }

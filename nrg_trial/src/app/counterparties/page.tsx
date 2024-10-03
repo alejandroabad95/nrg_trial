@@ -1,6 +1,10 @@
-"use client";
+"use client"; // Marca el archivo como un componente de cliente
+
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
+import CounterpartiesTable from '../components/CounterpartiesTable';
+import { useTranslations } from '../../utils/i18n'; // Asegúrate de que este hook exista
+import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
 
 interface Counterparty {
   id: number;
@@ -12,48 +16,48 @@ export default function CounterpartiesPage() {
   const [counterparties, setCounterparties] = useState<Counterparty[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  const { currentLang } = useLanguage(); // Obtén el idioma actual
+  const translations = useTranslations(currentLang); // Obtén las traducciones
 
   useEffect(() => {
     const fetchCounterparties = async () => {
       const session = await getSession();
-      console.log('Session:', session); // Log de sesión para verificar
 
       if (!session || !session.accessToken) {
-        setError('No estás autorizado');
+        setError(translations.notAuthorized); // Usar la traducción aquí
         setLoading(false);
         return;
       }
 
-      console.log("Access Token:", session.accessToken); // Log del token
-
       try {
         const response = await fetch('/api/counterparties', {
           headers: {
-            Authorization: `Token ${session.accessToken}`, // Asegúrate de usar "Token"
+            Authorization: `Token ${session.accessToken}`,
           },
         });
 
         if (!response.ok) {
-          const errorText = await response.text(); // Captura el texto de error
-          console.error("Error Response:", errorText); // Log del error
+          const errorText = await response.text();
+          console.error("Error Response:", errorText);
           throw new Error(`Error al obtener los counterparties: ${errorText}`);
         }
 
         const data = await response.json();
-        setCounterparties(data); // Almacena los counterparties en el estado
+        setCounterparties(data);
       } catch (error) {
-        console.error("Error fetching counterparties:", error); // Log del error
-        setError(error instanceof Error ? error.message : 'Error desconocido');
+        console.error("Error fetching counterparties:", error);
+        setError(error instanceof Error ? error.message : translations.error); // Usar la traducción aquí
       } finally {
         setLoading(false);
       }
     };
 
     fetchCounterparties();
-  }, []);
+  }, [translations]); // Asegúrate de que el efecto se dispare si las traducciones cambian
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return <div>{translations.loading}</div>; // Usar la traducción aquí
   }
 
   if (error) {
@@ -61,26 +65,9 @@ export default function CounterpartiesPage() {
   }
 
   return (
-    <div>
-      <h1>Counterparties</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Tipo</th>
-          </tr>
-        </thead>
-        <tbody>
-          {counterparties.map((counterparty) => (
-            <tr key={counterparty.id}>
-              <td>{counterparty.id}</td>
-              <td>{counterparty.name}</td>
-              <td>{counterparty.type}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="m-4">
+      <h1>{translations.counterparties}</h1>
+      <CounterpartiesTable counterparties={counterparties} />
     </div>
   );
 }
