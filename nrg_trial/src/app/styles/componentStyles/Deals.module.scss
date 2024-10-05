@@ -1,0 +1,25 @@
+// Deals.module.scss
+@import '../variables';
+@import '../mixins';
+
+.dealContainer {
+    @include fade-in;
+   
+}
+
+.dealContainer p {
+    color: $primary-color;
+    /* Color de los párrafos */
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+  
+}
+
+.dealContainer span {
+    color: $accent-color;
+    /* Cambiar el color del span dentro de p */
+}
+
+.goBackButton {
+    @include go-back-button;
+}

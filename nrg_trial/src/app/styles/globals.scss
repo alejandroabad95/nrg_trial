@@ -65,31 +65,13 @@ h3 {
 }
 h4 {
   font-size: 1.5rem; // Tamaño de fuente para h4
+  @include slide-down;
 }
 h5 {
   font-size: 1.25rem; // Tamaño de fuente para h5
 }
 h6 {
   font-size: 1rem; // Tamaño de fuente para h6, usar en el footer
-}
-
-/* Error */
-
-.errorContainer {
-  padding: 0; // Espaciado interno
-  max-width: 100%; // Asegúrate de que no exceda el ancho del formulario
-  width: 100%; // Ocupa todo el ancho disponible
-  overflow-wrap: break-word; // Permite que el texto largo se rompa
-  margin-top: 10px;
-}
-
-.error {
-  color: $error-color; // Color del texto de error
-  font-weight: bold;
-  white-space: normal; // Permite que el texto se rompa en varias líneas
-  word-wrap: break-word; // Permite que las palabras largas se envuelvan
-  display: block; // Asegura que cada error ocupe una nueva línea
-
 }
 
 /* Forms */
@@ -162,8 +144,17 @@ td {
   color: $primary-color;
   font-weight: bolder;
   font-size: larger;
-  
+
 }
+
+td span {
+  &:hover {
+    cursor: pointer;
+    color: $accent-color;
+    text-decoration: underline;
+  }
+}
+
 
 /* Encabezados de tabla */
 th {
@@ -185,4 +176,39 @@ tr:nth-child(even) {
 tr:hover {
   background-color: darken($background-color, 10%);
   /* Efecto hover */
+}
+
+/* Éxito */
+.succesContainer {
+  padding: 0; // Espaciado interno
+  max-width: 100%; // Asegúrate de que no exceda el ancho del formulario
+  width: 100%; // Ocupa todo el ancho disponible
+  overflow-wrap: break-word; // Permite que el texto largo se rompa
+  margin-top: 10px;
+}
+
+.succes {
+  color: $succes-color; // Color del texto de éxito (define el color en tus variables)
+  font-weight: bold;
+  white-space: normal; // Permite que el texto se rompa en varias líneas
+  word-wrap: break-word; // Permite que las palabras largas se envuelvan
+  display: block; // Asegura que cada mensaje de éxito ocupe una nueva línea
+}
+
+/* Error */
+.errorContainer {
+  padding: 0; // Espaciado interno
+  max-width: 100%; // Asegúrate de que no exceda el ancho del formulario
+  width: 100%; // Ocupa todo el ancho disponible
+  overflow-wrap: break-word; // Permite que el texto largo se rompa
+  margin-top: 10px;
+}
+
+.error {
+  color: $error-color; // Color del texto de error
+  font-weight: bold;
+  white-space: normal; // Permite que el texto se rompa en varias líneas
+  word-wrap: break-word; // Permite que las palabras largas se envuelvan
+  display: block; // Asegura que cada error ocupe una nueva línea
+
 }

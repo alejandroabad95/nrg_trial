@@ -28,6 +28,13 @@
 @mixin change-password-button {
     @include button-base($warning-color, $primary-text-color); // Usar un color específico para el botón de cambio de contraseña
 }
+// Mixin volver atrás
+@mixin go-back-button {
+    @include button-base(transparent, $primary-color, $font-size-button, 8px 20px, auto, 8px);
+}
+
+
+
 // Mixin animaciones
 
 @mixin slide-up {

@@ -1,8 +1,7 @@
-// components/DealsRow.tsx
 'use client'; // Asegúrate de que este componente sea un cliente
 
 import React from 'react';
-import { useRouter } from 'next/navigation'; // Asegúrate de importar desde next/navigation
+import { useRouter } from 'next/navigation';
 
 interface Deal {
   id: string;
@@ -17,37 +16,43 @@ interface Deal {
 
 interface DealsRowProps {
   deal: Deal;
+  translations: Record<string, string>; // Añadido para recibir las traducciones
 }
 
-const DealsRow: React.FC<DealsRowProps> = ({ deal }) => {
-  const router = useRouter(); // Inicializa el router
+const DealsRow: React.FC<DealsRowProps> = ({ deal, translations }) => {
+  const router = useRouter();
 
-  // Etiquetas de estado y sentido
   const statusLabels: { [key: number]: string } = {
-    0: 'Inactivo',
-    1: 'No Verificado',
-    2: 'Verificado',
+    0: translations.inactive || 'Inactivo',
+    1: translations.unverified || 'No Verificado',
+    2: translations.verified || 'Verificado',
   };
 
   const senseLabels: { [key: number]: string } = {
-    1: 'Compra',
-    2: 'Venta',
+    1: translations.buy || 'Compra',
+    2: translations.sell || 'Venta',
   };
 
   const handleRowClick = () => {
-    router.push(`/deals/${deal.id}`); // Redirige a la página de detalles del deal
+    router.push(`/deals/${deal.id}`);
   };
 
   return (
-    <tr className="border-b hover:bg-gray-100 cursor-pointer" onClick={handleRowClick}>
-      <td className="p-2">{deal.id}</td> {/* ID */}
-      <td className="p-2">{deal.code}</td> {/* Código */}
-      <td className="p-2">{new Date(deal.trade_date).toLocaleDateString()}</td> {/* Fecha de Comercio */}
-      <td className="p-2">{statusLabels[deal.status]}</td> {/* Estado */}
-      <td className="p-2">{deal.proposed_to}</td> {/* Propuesto a */}
-      <td className="p-2">{senseLabels[deal.sense]}</td> {/* Sentido */}
-      <td className="p-2">{deal.volume}</td> {/* Volumen */}
-      <td className="p-2">{deal.fixed_price}</td> {/* Precio Fijo */}
+    <tr>
+      {/* <td onClick={handleRowClick}>{deal.id}</td> */}
+
+      <td className='' onClick={() => handleRowClick()}>
+        <span className=''>{deal.id}</span>
+      </td>
+
+      
+      <td>{deal.code}</td>
+      <td>{new Date(deal.trade_date).toLocaleDateString()}</td>
+      <td>{statusLabels[deal.status]}</td>
+      <td>{deal.proposed_to}</td>
+      <td>{senseLabels[deal.sense]}</td>
+      <td>{deal.volume}</td>
+      <td>{deal.fixed_price}</td>
     </tr>
   );
 };
