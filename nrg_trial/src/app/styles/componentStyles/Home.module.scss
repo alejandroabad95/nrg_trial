@@ -1,0 +1,10 @@
+// Home.module.scss
+@import '../variables';
+@import '../mixins';
+
+.description {
+    font-size:x-large;
+    margin-top: 40px;
+    text-align: center;
+    @include zoom-in;
+}

@@ -1,0 +1,88 @@
+@import './variables'; 
+
+// Mixin base para botones
+@mixin button-base($bg-color, $text-color, $font-size: $font-size-button, $padding: 10px 60px, $width: auto, $border-radius: 4px) {
+    background-color: $bg-color;
+    color: $text-color; 
+    border: none;
+    border-radius: $border-radius;
+    padding: $padding;
+    font-size: $font-size-button; // Tamaño de fuente personalizado
+    font-weight: bolder;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: darken($bg-color, 5%); // Oscurecer el fondo al pasar el mouse
+    }
+}
+// Mixin para botón de traducción
+@mixin translate-button {
+    @include button-base($secondary-color,$secondary-text-color,$font-size-button,10px,20px,50%);
+}
+// Mixin para botón de login
+@mixin login-button {
+    @include button-base($succes-color, $secondary-text-color); // Usar el color primario definido en variables
+}
+// Mixin para botón de cambio de contraseña
+@mixin change-password-button {
+    @include button-base($warning-color, $primary-text-color); // Usar un color específico para el botón de cambio de contraseña
+}
+// Mixin animaciones
+@mixin slide-up {
+    animation: slideUp $animation-duration $animation-easing $animation-fill-mode;
+    @keyframes slideUp {
+        from {
+            transform: translateY(20vh); // Comienza fuera de la pantalla
+            opacity: 0; // Comienza invisible
+        }
+
+        to {
+            transform: translateY(0); // Termina en su posición original
+            opacity: 1; // Termina visible
+        }
+    }
+}
+@mixin slide-down {
+    animation: slideDown $animation-duration $animation-easing $animation-fill-mode;
+
+    @keyframes slideDown {
+        from {
+            transform: translateY(-2vh); // Comienza fuera de la pantalla, hacia arriba
+            opacity: 0; // Comienza invisible
+        }
+
+        to {
+            transform: translateY(0); // Termina en su posición original
+            opacity: 1; // Termina visible
+        }
+    }
+}
+@mixin fade-in {
+    animation: fadeIn $animation-duration $animation-easing $animation-fill-mode;
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0; // Comienza invisible
+        }
+
+        100% {
+            opacity: 1; // Termina visible
+        }
+    }
+}
+@mixin zoom-in {
+    animation: zoomIn $animation-duration $animation-easing $animation-fill-mode;
+
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.9); // Comienza con un 90% del tamaño original (más sutil)
+            opacity: 0; // Comienza invisible
+        }
+
+        to {
+            transform: scale(1); // Termina en su tamaño normal
+            opacity: 1; // Termina visible
+        }
+    }
+}

@@ -1,0 +1,32 @@
+// Loader.module.scss
+@import '../variables';
+
+
+.loader-container {
+    display: flex; // Usar Flexbox
+    align-items: center; // Centra verticalmente
+    justify-content: center; // Centra horizontalmente
+    height: 100vh; // Altura del contenedor para centrar en la pantalla
+   
+}
+
+.loader {
+    border: 8px solid $secondary-text-color; // Color de fondo del borde
+    border-top: 8px solid $primary-color; // Utilizamos una de las variables que ya tienes, por ejemplo, $primary-color
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    
+    animation: spin 1.5s linear infinite;
+
+    // Definimos la animación "spin"
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

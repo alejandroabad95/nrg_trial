@@ -6,6 +6,7 @@ import { changePassword } from '../services/auth';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
 import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
+import styles from "../styles/componentStyles/ChangePassword.module.scss"; // Asegúrate de tener este módulo
 
 const ChangePassword = () => {
   const { data: session } = useSession(); // Obtener la sesión para acceder al token
@@ -32,7 +33,7 @@ const ChangePassword = () => {
       await changePassword(newPassword, session.accessToken);
       setSuccess(translations.changePassword || "Contraseña cambiada con éxito."); // Traducción de éxito
       setNewPassword(''); // Limpia el campo de la contraseña después de éxito
-      router.push('/'); // Redirige a otra página después del cambio, si lo deseas
+      router.push('/'); 
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message); // Accede al mensaje de error si es un Error
@@ -43,26 +44,33 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-md mt-10">
-      <h1 className="text-2xl font-bold mb-4">{translations.changePassword || "Cambiar Contraseña"}</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {error && <div className="text-red-500">{error}</div>}
-        {success && <div className="text-green-500">{success}</div>}
+    <div className="flex items-start justify-center mt-28">
+      <form onSubmit={handleSubmit}>
+        <h2>{translations.passwordTitle}</h2>
+
+
+        {error && <div className="text-red-500 mb-4">{error}</div>} {/* Muestra error si existe */}
+        {success && <div className="text-green-500 mb-4">{success}</div>} {/* Mensaje de éxito */}
         
-        <div>
-          <label className="block mb-1">{translations.password || "Nueva Contraseña"}</label> {/* Usar traducción de password */}
+        <div className='mt-8'>
           <input
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            className="w-full border rounded p-2"
             required
+            placeholder={translations.newPassword || "Nueva Contraseña"} // Usa traducción de password
+            className="w-full border rounded p-2"
           />
         </div>
         
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          {translations.changePassword || "Cambiar Contraseña"} {/* Usar traducción de cambiar contraseña */}
-        </button>
+        <div className='text-center'>
+          <button
+            type="submit"
+            className={`${styles['change-password-button']} mt-8`}
+          >
+            {translations.changePassword} {/* Usa traducción de cambiar contraseña */}
+          </button>
+        </div>
       </form>
     </div>
   );

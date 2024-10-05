@@ -1,0 +1,39 @@
+@import '../mixins';
+@import '../variables';
+
+.translate-button {
+    @include translate-button;
+}
+
+
+.nav-title {
+    margin-left: 1.75rem; 
+    font-size: 1.875rem; 
+    font-weight: bold; 
+    -webkit-text-stroke: 1px $accent-color;
+    &:hover {
+            color: $background-color; // Oscurece el color al hacer hover
+        }
+}
+
+.dropdown {
+    background-color: lighten($primary-color, 20%);
+    border-radius: 2px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Sombra para el dropdown
+    margin-top: 0.5rem; 
+    min-width: 160px;
+
+    li {
+        color:$secondary-text-color;
+        -webkit-text-stroke: 0px;
+        padding: 4px 10px; 
+        white-space: nowrap;
+        animation: none;
+       
+
+    &:hover {
+        color: $accent-color;
+        background-color: $background-color; // Cambia el color de fondo al hacer hover
+    }   
+    }   
+}

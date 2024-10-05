@@ -1,19 +1,43 @@
-"use client"; // Esto marca el archivo como un Client Component
+"use client";
 
-import { useTranslations } from '../utils/i18n'; // Asegúrate de que este hook esté definido
-import { useLanguage } from './context/LanguageContext'; // Usa el hook que maneja el contexto
+import { useTranslations } from '../utils/i18n';
+import { useLanguage } from './context/LanguageContext';
+import { useEffect, useState } from 'react';
+import Loader from './components/Loader';
+import homeStyles from './styles/componentStyles/Home.module.scss';
 
 export default function Home() {
-  const { currentLang } = useLanguage(); // Obtén el idioma actual desde el hook
-  const translations = useTranslations(currentLang); // Obtén las traducciones según el idioma actual
+  const { currentLang } = useLanguage();
+  const translations = useTranslations(currentLang);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 5000); 
+    if (translations && Object.keys(translations).length > 0) {
+      setLoading(false);
+    }
+    return () => clearTimeout(timeout);
+  }, [translations]);
 
   return (
     <main className="flex flex-col items-center justify-center flex-grow">
-      <div className="w-full max-w-4xl mx-auto mt-20 text-center">
-        <h1 className="text-4xl font-bold mb-4">{translations.welcome || 'Loading...'}</h1>
-        <p className="text-lg text-center mt-20">{translations.welcomeDescription || 'Loading...'}</p>
+      <div className="flex flex-col items-center justify-center max-w-5xl mt-36 text-center">
+        {loading ? (
+          <Loader/>
+        ) : (
+          <>
+            <h1>{translations?.welcome}</h1>
+            <p className={`${homeStyles.description} mt-2`}>{translations?.welcomeDescription}</p> 
+          </>
+         
+        )}
       </div>
     </main>
   );
 }
+
+
+
 

@@ -2,8 +2,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
-import DealsTable from '../components/DealsTable'; // Importa el componente de tabla
-import DealsFilters from '../components/DealsFilters'; // Importa el componente de filtros
+import DealsTable from '../components/DealsTable';
+import DealsFilters from '../components/DealsFilters';
 import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
 import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
 

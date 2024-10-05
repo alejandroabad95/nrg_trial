@@ -1,16 +1,24 @@
 {
-  "contracts": "Deals",
+  "contracts": "Contracts",
   "counterparties": "Counterparties",
   "users": "Users",
   "principals": "Principals",
   "myProfile": "My Profile",
+
+  "passwordTitle": "Create a new password",
+
+  "newPassword": "New password",
+
   "changePassword": "Change Password",
+
+
   "logout": "Logout",
   "login": "Login",
+  
   "languageSwitch": "Change Language",
 
   "welcome": "Welcome to ETRM2",
-  "welcomeDescription": "With ETRM2, optimize commodity contract management efficiently and effectively. Our platform allows for market risk tracking, data optimization, and loss minimization, providing essential support for energy trading operations.",
+  "welcomeDescription": "With ETRM2, optimize the management of commodity contracts efficiently and effectively. Our platform allows for market risk tracking, data optimization, and loss minimization, providing essential support for energy trading operations.",
 
   "loading": "Loading...",
   "error": "Error",
@@ -36,11 +44,11 @@
   "fixed_price": "Fixed Price",
 
   "dealDetails": "Deal Details",
-  "isBilling": "Is Billing?", 
-  "isDeleted": "Is Deleted?", 
-  "measurementUnit": "Measurement Unit", 
+  "isBilling": "Is Billing?",
+  "isDeleted": "Is Deleted?",
+  "measurementUnit": "Measurement Unit",
 
-  "type":"type",
+  "type": "Type",
 
   "fetchError": "Error fetching users",
   "username": "Username",
@@ -51,7 +59,7 @@
   "no": "No",
 
   "name": "Name",
-  "shortName": "Short name",
+  "shortName": "Short Name",
 
   "footer": "© ETRM2 all rights reserved"
 }

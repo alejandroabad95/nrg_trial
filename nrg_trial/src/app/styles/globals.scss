@@ -1,0 +1,121 @@
+@import './tailwind.css';
+@import './variables';
+@import './mixins';
+
+
+/* Estilos globales */
+:root {
+  background-color: $background-color;
+
+}
+
+/* Body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-base;
+  color: $primary-text-color;
+}
+
+
+/* Generales navbar y footer */
+nav {
+  background-color: $primary-color; 
+  color: $secondary-text-color;
+  @include fade-in;
+  li {
+    @include zoom-in; // Aplica la animación al h6 dentro del footer
+    -webkit-text-stroke: 0.5px $info-color;
+    &:hover {
+        color: $accent-color; // Oscurece el color al hacer hover
+        transform: scale(1.05); // Aumenta ligeramente el tamaño
+      }
+  }
+}
+
+
+
+footer {
+  background-color: $primary-color; 
+  color: $secondary-text-color;
+  @include fade-in;
+  h6 {
+      @include zoom-in; // Aplica la animación al h6 dentro del footer
+      -webkit-text-stroke: 0.5px $info-color;
+    }
+}
+
+
+/* Headers */
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: $font-family-header; // Fuente común para todos los encabezados
+  
+}
+h1 {
+  font-size: 2.5rem; // Tamaño de fuente para h1
+  @include slide-down;
+}
+h2 {
+  font-size: 2rem; // Tamaño de fuente para h2
+}
+h3 {
+  font-size: 1.75rem; // Tamaño de fuente para h3
+}
+h4 {
+  font-size: 1.5rem; // Tamaño de fuente para h4
+}
+h5 {
+  font-size: 1.25rem; // Tamaño de fuente para h5
+}
+h6 {
+  font-size: 1rem; // Tamaño de fuente para h6, usar en el footer
+}
+
+
+/* Forms */
+
+form {
+  background-color: $secondary-color; // Color de fondo del formulario
+  color: $secondary-text-color; // Color de texto
+  border: 2px solid $primary-color; // Bordes del formulario
+  border-radius: 8px; // Bordes redondeados
+  padding: 40px; // Espaciado interno
+
+  // Sombra para el efecto 3D
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.15), // Sombra inferior
+    0 2px 10px rgba(255, 255, 255, 0.2); // Sombra superior
+
+  @include slide-up;
+  
+}
+
+
+input {
+  background-color: #fff; // Fondo blanco para el input
+  color: $primary-text-color; // Color del texto dentro del input
+  border: 1px solid $primary-color; // Borde del input
+  border-radius: 8px; // Bordes redondeado
+  padding: 10px; // Espaciado interno
+  font-weight:bold;
+  font-size: 16px; // Tamaño de la fuente
+  width: 100%; // Ancho completo del contenedor
+  box-sizing: border-box; // Para incluir padding y border en el width total
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  // Efecto al enfocar el campo de entrada
+  &:focus {
+    outline: none; // Quitar el borde de enfoque por defecto
+    border-color: darken($primary-color, 10%); // Oscurecer el borde en enfoque
+    box-shadow: 0 0 5px rgba($primary-color, 0.5); // Sombra en enfoque
+  }
+
+  // Estilo del placeholder
+  &::placeholder {
+    color: lighten($primary-text-color, 20%); // Color del placeholder
+    opacity: 0.8; // Opacidad del placeholder
+  }
+}
+
+/* Tablas */
