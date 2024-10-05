@@ -1,10 +1,11 @@
-"use client"; // Marca el archivo como un componente de cliente
+"use client";
 
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
 import CounterpartiesTable from '../components/CounterpartiesTable';
-import { useTranslations } from '../../utils/i18n'; // Asegúrate de que este hook exista
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
+import { useTranslations } from '../../utils/i18n';
+import { useLanguage } from '../context/LanguageContext';
+import Loader from '../components/Loader'; // Asegúrate de importar el Loader
 
 interface Counterparty {
   id: number;
@@ -13,19 +14,17 @@ interface Counterparty {
 }
 
 export default function CounterpartiesPage() {
+  const { currentLang } = useLanguage();
+  const translations = useTranslations(currentLang);
   const [counterparties, setCounterparties] = useState<Counterparty[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  
-  const { currentLang } = useLanguage(); // Obtén el idioma actual
-  const translations = useTranslations(currentLang); // Obtén las traducciones
 
   useEffect(() => {
     const fetchCounterparties = async () => {
       const session = await getSession();
 
       if (!session || !session.accessToken) {
-        setError(translations.notAuthorized); // Usar la traducción aquí
+        // Manejo de sesión
         setLoading(false);
         return;
       }
@@ -38,36 +37,34 @@ export default function CounterpartiesPage() {
         });
 
         if (!response.ok) {
-          const errorText = await response.text();
-          console.error("Error Response:", errorText);
-          throw new Error(`Error al obtener los counterparties: ${errorText}`);
+          throw new Error(`Error al obtener los counterparties`);
         }
 
         const data = await response.json();
         setCounterparties(data);
       } catch (error) {
         console.error("Error fetching counterparties:", error);
-        setError(error instanceof Error ? error.message : translations.error); // Usar la traducción aquí
       } finally {
         setLoading(false);
       }
     };
 
     fetchCounterparties();
-  }, [translations]); // Asegúrate de que el efecto se dispare si las traducciones cambian
-
-  if (loading) {
-    return <div>{translations.loading}</div>; // Usar la traducción aquí
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  }, [translations]);
 
   return (
-    <div className="m-4">
-      <h1>{translations.counterparties}</h1>
-      <CounterpartiesTable counterparties={counterparties} />
+    <div className="m-20">
+      <h2>{translations.counterparties}</h2>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="mt-10"> 
+          <CounterpartiesTable 
+            counterparties={counterparties} 
+            translations={translations} 
+          />
+        </div>
+      )}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import styles from '../styles/componentStyles/Loader.module.scss'; // Asegúrate
 
 const Loader: React.FC = () => {
   return (
-    <div className={styles.loaderContainer}>
+    <div className={`mt-10 ${styles.loaderContainer}`}>
       <div className={styles.loader}></div>
     </div>
   );

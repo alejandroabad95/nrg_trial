@@ -58,6 +58,7 @@ h1 {
 }
 h2 {
   font-size: 2rem; // Tamaño de fuente para h2
+  @include slide-down;
 }
 h3 {
   font-size: 1.75rem; // Tamaño de fuente para h3
@@ -72,6 +73,24 @@ h6 {
   font-size: 1rem; // Tamaño de fuente para h6, usar en el footer
 }
 
+/* Error */
+
+.errorContainer {
+  padding: 0; // Espaciado interno
+  max-width: 100%; // Asegúrate de que no exceda el ancho del formulario
+  width: 100%; // Ocupa todo el ancho disponible
+  overflow-wrap: break-word; // Permite que el texto largo se rompa
+  margin-top: 10px;
+}
+
+.error {
+  color: $error-color; // Color del texto de error
+  font-weight: bold;
+  white-space: normal; // Permite que el texto se rompa en varias líneas
+  word-wrap: break-word; // Permite que las palabras largas se envuelvan
+  display: block; // Asegura que cada error ocupe una nueva línea
+
+}
 
 /* Forms */
 
@@ -81,6 +100,7 @@ form {
   border: 2px solid $primary-color; // Bordes del formulario
   border-radius: 8px; // Bordes redondeados
   padding: 40px; // Espaciado interno
+  max-width: 360px;
 
   // Sombra para el efecto 3D
   box-shadow:
@@ -119,3 +139,50 @@ input {
 }
 
 /* Tablas */
+
+table {
+  border-collapse: collapse;
+  @include slide-in;
+  width: 100%;
+  max-width: 70%;
+}
+
+/* Estilos de celdas de la tabla */
+th,
+td {
+  padding: 5px 10px; 
+  border: 3px ridge $secondary-color; 
+  text-align: left; 
+
+  max-width: 120px;
+  min-width: 40px;
+  width: auto;
+
+  overflow: auto; 
+  color: $primary-color;
+  font-weight: bolder;
+  font-size: larger;
+  
+}
+
+/* Encabezados de tabla */
+th {
+  background-color: $accent-color;
+  color: $secondary-text-color;
+}
+
+/* Filas alternas */
+tr:nth-child(odd) {
+  background-color: $info-color;
+}
+
+tr:nth-child(even) {
+  background-color: $background-color;
+
+}
+
+/* Fila en hover */
+tr:hover {
+  background-color: darken($background-color, 10%);
+  /* Efecto hover */
+}

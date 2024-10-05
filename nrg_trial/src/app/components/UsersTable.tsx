@@ -16,14 +16,14 @@ interface UsersTableProps {
 
 const UsersTable: React.FC<UsersTableProps> = ({ users, translations }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-300 rounded shadow">
+    <div>
+      <table>
         <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2 text-left">ID</th>
-            <th className="p-2 text-left">{translations.username || 'Nombre de usuario'}</th>
-            <th className="p-2 text-left">{translations.group || 'Grupo'}</th>
-            <th className="p-2 text-left">{translations.isStaff || '¿Es Staff?'}</th>
+          <tr>
+            <th>ID</th>
+            <th>{translations.username || 'Nombre de usuario'}</th>
+            <th>{translations.group || 'Grupo'}</th>
+            <th>{translations.isStaff || '¿Es Staff?'}</th>
           </tr>
         </thead>
         <tbody>

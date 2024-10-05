@@ -21,7 +21,7 @@
   "welcomeDescription": "With ETRM2, optimize the management of commodity contracts efficiently and effectively. Our platform allows for market risk tracking, data optimization, and loss minimization, providing essential support for energy trading operations.",
 
   "loading": "Loading...",
-  "error": "Error",
+  "error": "Authentication error, please check your credentials or try again later.",
   "notAuthorized": "You are not authorized",
 
   "filters": "Filters",
@@ -49,6 +49,16 @@
   "measurementUnit": "Measurement Unit",
 
   "type": "Type",
+
+  "typeLabels": {
+  "1": "Client",
+  "2": "Market",
+  "3": "OTC"
+  },
+
+
+
+
 
   "fetchError": "Error fetching users",
   "username": "Username",

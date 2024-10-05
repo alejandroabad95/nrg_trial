@@ -35,8 +35,17 @@ const LoginPage = () => {
   return (
     <div className="flex items-start mt-28 justify-center"> 
       <form onSubmit={handleSubmit}>
-        <h2>{translations.welcome}</h2>
-        {error && <div className="text-red-500 mb-4">{error}</div>} {/* Muestra error si existe */}
+        <h3>{translations.welcome}</h3>
+        {error &&
+          <div className="errorContainer">
+            <span className='error'>
+
+              {translations.error}
+
+            </span>
+        
+        
+        </div>} {/* Muestra error si existe */}
         
         <div className='mt-8'>
           <input
@@ -76,4 +85,6 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+
 

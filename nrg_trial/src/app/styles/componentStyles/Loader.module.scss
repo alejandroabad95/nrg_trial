@@ -7,9 +7,9 @@
     align-items: center; // Centra verticalmente
     justify-content: center; // Centra horizontalmente
     height: 100vh; // Altura del contenedor para centrar en la pantalla
+  
    
 }
-
 .loader {
     border: 8px solid $secondary-text-color; // Color de fondo del borde
     border-top: 8px solid $primary-color; // Utilizamos una de las variables que ya tienes, por ejemplo, $primary-color

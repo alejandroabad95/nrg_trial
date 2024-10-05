@@ -24,7 +24,7 @@
 
 
   "loading": "Cargando...",
-  "error": "Error",
+  "error": "Error en la autenticación, introduce bien tus datos o inténtalo más tarde",
   "notAuthorized": "No estás autorizado",
 
 
@@ -48,15 +48,18 @@
   "volume": "Volumen",
   "fixed_price": "Precio Fijo",
 
-   "dealDetails": "Detalles del Deal", 
+  "dealDetails": "Detalles del Deal", 
   "isBilling": "Es Facturación?", 
   "isDeleted": "Es Eliminado?", 
   "measurementUnit": "Unidad de Medida",
 
+  "type":"Tipo",
+  "typeLabels": {
+      "1": "Cliente",
+      "2": "Mercado",
+      "3": "OTC"
+    },
 
-  "type":"tipo",
-
-  
   "fetchError": "Error al obtener los usuarios",
   "username": "Nombre de usuario",
   "password": "Contraseña",
@@ -64,8 +67,6 @@
   "isStaff": "¿Es Staff?",
   "yes": "Sí",
   "no": "No",
-
-
 
   "name": "Nombre",
   "shortName": "Nombre Corto",

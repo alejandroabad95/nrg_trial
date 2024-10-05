@@ -29,6 +29,7 @@
     @include button-base($warning-color, $primary-text-color); // Usar un color específico para el botón de cambio de contraseña
 }
 // Mixin animaciones
+
 @mixin slide-up {
     animation: slideUp $animation-duration $animation-easing $animation-fill-mode;
     @keyframes slideUp {
@@ -43,6 +44,23 @@
         }
     }
 }
+
+@mixin slide-in {
+    animation: slideIn $animation-duration $animation-easing $animation-fill-mode;
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(2vh); // Comienza desplazado hacia la derecha
+            opacity: 0; // Comienza invisible
+        }
+
+        to {
+            transform: translateX(0); // Termina en su posición original
+            opacity: 1; // Termina visible
+        }
+    }
+}
+
 @mixin slide-down {
     animation: slideDown $animation-duration $animation-easing $animation-fill-mode;
 

@@ -1,7 +1,6 @@
+// components/CounterpartiesTable.tsx
 import React from 'react';
 import CounterpartiesRow from './CounterpartiesRow';
-import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
 
 interface Counterparty {
   id: number;
@@ -11,24 +10,22 @@ interface Counterparty {
 
 interface CounterpartiesTableProps {
   counterparties: Counterparty[];
+  translations: { [key: string]: string }; // Agrega el tipo para las traducciones
 }
 
-const CounterpartiesTable: React.FC<CounterpartiesTableProps> = ({ counterparties }) => {
-  const { currentLang } = useLanguage(); // Obtén el idioma actual
-  const translations = useTranslations(currentLang); // Obtén las traducciones
-
+const CounterpartiesTable: React.FC<CounterpartiesTableProps> = ({ counterparties, translations }) => {
   return (
-    <table className="min-w-full border-collapse border border-gray-200">
+    <table>
       <thead>
         <tr>
-          <th className="p-2 text-left">ID</th> {/* Sin traducción */}
-          <th className="p-2 text-left">{translations.name}</th> {/* Traducción para Nombre */}
-          <th className="p-2 text-left">{translations.type}</th> {/* Traducción para Tipo */}
+          <th>ID</th> {/* Sin traducción */}
+          <th>{translations.name}</th> {/* Traducción para Nombre */}
+          <th>{translations.type}</th> {/* Traducción para Tipo */}
         </tr>
       </thead>
       <tbody>
         {counterparties.map(counterparty => (
-          <CounterpartiesRow key={counterparty.id} counterparty={counterparty} />
+          <CounterpartiesRow key={counterparty.id} counterparty={counterparty} translations={translations} /> 
         ))}
       </tbody>
     </table>

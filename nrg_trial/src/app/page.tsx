@@ -4,13 +4,13 @@ import { useTranslations } from '../utils/i18n';
 import { useLanguage } from './context/LanguageContext';
 import { useEffect, useState } from 'react';
 import Loader from './components/Loader';
-import homeStyles from './styles/componentStyles/Home.module.scss';
+import styles from './styles/componentStyles/Home.module.scss';
 
 export default function Home() {
   const { currentLang } = useLanguage();
   const translations = useTranslations(currentLang);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
@@ -29,7 +29,7 @@ export default function Home() {
         ) : (
           <>
             <h1>{translations?.welcome}</h1>
-            <p className={`${homeStyles.description} mt-2`}>{translations?.welcomeDescription}</p> 
+            <p className={`${styles.description} mt-2`}>{translations?.welcomeDescription}</p> 
           </>
          
         )}

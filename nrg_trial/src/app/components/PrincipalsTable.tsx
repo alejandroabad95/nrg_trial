@@ -1,8 +1,5 @@
-// components/PrincipalsTable.tsx
 import React from 'react';
-import PrincipalsRow from './PrincipalsRow';
-import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
+import PrincipalsRow from './PrincipalsRow'; // Asegúrate de que la ruta sea correcta
 
 interface Principal {
   id: string;
@@ -12,27 +9,27 @@ interface Principal {
 
 interface PrincipalsTableProps {
   principals: Principal[];
+  translations: Record<string, string>; // Añadido para recibir las traducciones
 }
 
-const PrincipalsTable: React.FC<PrincipalsTableProps> = ({ principals }) => {
-  const { currentLang } = useLanguage(); // Obtén el idioma actual
-  const translations = useTranslations(currentLang); // Obtén las traducciones
-
+const PrincipalsTable: React.FC<PrincipalsTableProps> = ({ principals, translations }) => {
   return (
-    <table className="min-w-full">
-      <thead>
-        <tr className="bg-gray-300">
-          <th className="p-2 text-left">ID</th> {/* Sin traducción */}
-          <th className="p-2 text-left">{translations.name}</th> {/* Traducción para Nombre */}
-          <th className="p-2 text-left">{translations.shortName}</th> {/* Traducción para Nombre Corto */}
-        </tr>
-      </thead>
-      <tbody>
-        {principals.map((principal) => (
-          <PrincipalsRow key={principal.id} principal={principal} />
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>{translations.name}</th> 
+            <th>{translations.shortName}</th> 
+          </tr>
+        </thead>
+        <tbody>
+          {principals.map((principal) => (
+            <PrincipalsRow key={principal.id} principal={principal} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

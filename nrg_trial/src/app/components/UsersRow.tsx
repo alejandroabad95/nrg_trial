@@ -16,11 +16,11 @@ interface UsersRowProps {
 const UsersRow: React.FC<UsersRowProps> = ({ user, translations }) => {
 
   return (
-    <tr className="border-b hover:bg-gray-100">
-      <td className="p-2">{user.id}</td>
-      <td className="p-2">{user.username}</td>
-      <td className="p-2">{user.groups.join(', ')}</td>
-      <td className="p-2">{user.is_staff ? translations.yes || 'Sí' : translations.no || 'No'}</td>
+    <tr>
+      <td>{user.id}</td>
+      <td>{user.username}</td>
+      <td>{user.groups.join(', ')}</td>
+      <td>{user.is_staff ? translations.yes || 'Sí' : translations.no || 'No'}</td>
     </tr>
   );
 };

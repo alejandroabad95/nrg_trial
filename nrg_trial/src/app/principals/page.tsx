@@ -1,73 +1,69 @@
-"use client";
+"use client"; // Asegúrate de que este archivo sea un componente de cliente
 
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
-import PrincipalsTable from '../components/PrincipalsTable'; // Importa el componente de tabla
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
-import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
+import PrincipalsTable from '../components/PrincipalsTable'; // Asegúrate de que la ruta sea correcta
+import { useLanguage } from '../context/LanguageContext'; // Importa el contexto de lenguaje
+import { useTranslations } from '../../utils/i18n'; // Asegúrate de que esta ruta sea correcta
+import Loader from '../components/Loader'; // Asegúrate de importar el Loader
 
 interface Principal {
-  id: string;
-  name: string;
-  short_name: string;
+  id: string;         // El ID del principal, es un string
+  name: string;       // El nombre del principal, un string
+  short_name: string; // El nombre corto del principal, un string
 }
 
 export default function PrincipalsPage() {
-  const { currentLang } = useLanguage(); // Obtén el idioma actual
-  const translations = useTranslations(currentLang); // Obtén las traducciones
-
+  const { currentLang } = useLanguage(); // Obtiene el idioma actual desde el contexto
+  const translations = useTranslations(currentLang); // Obtiene las traducciones según el idioma actual
   const [principals, setPrincipals] = useState<Principal[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPrincipals = async () => {
-      setLoading(true);
+      const session = await getSession();
+
+      if (!session || !session.accessToken) {
+        setLoading(false);
+        return;
+      }
 
       try {
-        const session = await getSession();
-
-        if (!session || !session.accessToken) {
-          throw new Error('No estás autorizado o no se pudo obtener el token');
-        }
-
-        // Llamar a la API interna para obtener los principals
-        const response = await fetch(`/api/principals`, {
+        const response = await fetch('/api/principals', {
           headers: {
-            Authorization: `Token ${session.accessToken}`,
+            Authorization: `Token ${session.accessToken}`, // Asegúrate de usar "Token"
           },
         });
 
         if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Error al obtener los principals: ${response.status} - ${errorText}`);
+          const errorText = await response.text(); // Captura el texto de error
+          console.error("Error Response:", errorText); // Log del error
+          throw new Error(`${translations.fetchError}: ${errorText}`); // Añade el mensaje de error traducido
         }
 
         const data = await response.json();
-        setPrincipals(data);
+        setPrincipals(data); // Almacena los principals en el estado
       } catch (error) {
-        console.error("Error fetching principals:", error);
-        setError(error instanceof Error ? error.message : 'Error desconocido');
+        console.error("Error fetching principals:", error); // Log del error
       } finally {
         setLoading(false);
       }
     };
 
     fetchPrincipals();
-  }, []);
-
-  if (loading) {
-    return <div>{translations.loading}</div>; // Mensaje de carga traducido
-  }
-
-  if (error) {
-    return <div>{translations.error}: {error}</div>; // Mensaje de error traducido
-  }
+  }, [translations]); 
 
   return (
-    <div className="container mx-auto max-w-4xl mt-10">
-      <h1 className="text-2xl font-bold mb-4">{translations.principals || 'Principals'}</h1>
-      <PrincipalsTable principals={principals} />
+    <div className="m-20">
+      <h2>{translations.principals}</h2>
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="mt-10">
+          <PrincipalsTable principals={principals} translations={translations} />
+        </div>
+      )}
     </div>
   );
 }
+
