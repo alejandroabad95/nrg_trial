@@ -2,15 +2,14 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
-import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
+import { useLanguage } from '../context/LanguageContext'; 
+import { useTranslations } from '../../utils/i18n'; 
 import styles from "../styles/componentStyles/Login.module.scss"
 
 const LoginPage = () => {
-  const { currentLang } = useLanguage(); // Obtén el idioma actual
-  const translations = useTranslations(currentLang); // Obtén las traducciones
-
-  const [username, setUsername] = useState(''); // Mantén username
+  const { currentLang } = useLanguage(); 
+  const translations = useTranslations(currentLang); 
+  const [username, setUsername] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
@@ -75,7 +74,7 @@ const LoginPage = () => {
           type="submit"
           className={`${styles['login-button']} mt-8`}
         >
-          {translations.login} {/* Usa la variable login del archivo de locales */}
+          {translations.login}
           </button>
         </div>
         

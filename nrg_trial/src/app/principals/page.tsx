@@ -1,21 +1,20 @@
-"use client"; // Asegúrate de que este archivo sea un componente de cliente
-
+"use client";
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
-import PrincipalsTable from '../components/PrincipalsTable'; // Asegúrate de que la ruta sea correcta
-import { useLanguage } from '../context/LanguageContext'; // Importa el contexto de lenguaje
-import { useTranslations } from '../../utils/i18n'; // Asegúrate de que esta ruta sea correcta
-import Loader from '../components/Loader'; // Asegúrate de importar el Loader
+import PrincipalsTable from '../components/PrincipalsTable'; 
+import { useLanguage } from '../context/LanguageContext'; 
+import { useTranslations } from '../../utils/i18n'; 
+import Loader from '../components/Loader'; 
 
 interface Principal {
-  id: string;         // El ID del principal, es un string
-  name: string;       // El nombre del principal, un string
-  short_name: string; // El nombre corto del principal, un string
+  id: string;         
+  name: string;       
+  short_name: string; 
 }
 
 export default function PrincipalsPage() {
-  const { currentLang } = useLanguage(); // Obtiene el idioma actual desde el contexto
-  const translations = useTranslations(currentLang); // Obtiene las traducciones según el idioma actual
+  const { currentLang } = useLanguage(); 
+  const translations = useTranslations(currentLang);
   const [principals, setPrincipals] = useState<Principal[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,20 +30,20 @@ export default function PrincipalsPage() {
       try {
         const response = await fetch('/api/principals', {
           headers: {
-            Authorization: `Token ${session.accessToken}`, // Asegúrate de usar "Token"
+            Authorization: `Token ${session.accessToken}`, 
           },
         });
 
         if (!response.ok) {
-          const errorText = await response.text(); // Captura el texto de error
-          console.error("Error Response:", errorText); // Log del error
-          throw new Error(`${translations.fetchError}: ${errorText}`); // Añade el mensaje de error traducido
+          const errorText = await response.text(); 
+          console.error("Error Response:", errorText); 
+          throw new Error(`${translations.fetchError}: ${errorText}`); 
         }
 
         const data = await response.json();
-        setPrincipals(data); // Almacena los principals en el estado
+        setPrincipals(data); 
       } catch (error) {
-        console.error("Error fetching principals:", error); // Log del error
+        console.error("Error fetching principals:", error); 
       } finally {
         setLoading(false);
       }

@@ -1,6 +1,6 @@
 // components/UsersTable.tsx
 import React from 'react';
-import UsersRow from './UsersRow'; // Asegúrate de que la ruta sea correcta
+import UsersRow from './UsersRow'; 
 
 interface User {
   id: string;
@@ -11,7 +11,7 @@ interface User {
 
 interface UsersTableProps {
   users: User[];
-  translations: Record<string, string>; // Añadido para recibir las traducciones
+  translations: Record<string, string>;
 }
 
 const UsersTable: React.FC<UsersTableProps> = ({ users, translations }) => {

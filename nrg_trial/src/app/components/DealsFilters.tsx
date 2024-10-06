@@ -1,4 +1,4 @@
-// export default DealsFilters;
+
 import React from 'react';
 
 interface Filters {
@@ -12,10 +12,10 @@ interface Filters {
   created_at_end: string;
   updated_at_start: string;
   updated_at_end: string;
-  volume_min: string;      // Añadido
-  volume_max: string;      // Añadido
-  fixed_price_min: string; // Añadido
-  fixed_price_max: string; // Añadido
+  volume_min: string;      
+  volume_max: string;     
+  fixed_price_min: string;
+  fixed_price_max: string; 
 }
 
 interface DealsFiltersProps {

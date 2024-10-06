@@ -1,27 +1,25 @@
 // export default Navbar;
-"use client"; // Asegúrate de que este archivo sea un componente de cliente
-
+"use client"; 
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
-import { useTranslations } from '../../utils/i18n'; // Asegúrate de importar el hook de traducciones
+import { useLanguage } from '../context/LanguageContext'; 
+import { useTranslations } from '../../utils/i18n'; 
 import { useState } from 'react';
 import styles from "../styles/componentStyles/Navbar.module.scss"
 
 const Navbar: React.FC = () => {
-  const { currentLang, setCurrentLang } = useLanguage(); // Obtén el estado del idioma desde el contexto
-  const translations = useTranslations(currentLang); // Obtén las traducciones para el idioma actual
+  const { currentLang, setCurrentLang } = useLanguage(); 
+  const translations = useTranslations(currentLang); 
   const { data: session } = useSession();
   const userGroups = session?.user?.groups || [];
-  
-  const [isDropdownOpen, setDropdownOpen] = useState(false); // Estado para controlar el menú desplegable
+  const [isDropdownOpen, setDropdownOpen] = useState(false); 
 
   const handleLanguageChange = () => {
-    setCurrentLang(currentLang === 'en' ? 'es' : 'en'); // Cambia el idioma al opuesto
+    setCurrentLang(currentLang === 'en' ? 'es' : 'en'); 
   };
 
   const toggleDropdown = () => {
-    setDropdownOpen(!isDropdownOpen); // Cambia el estado de visibilidad del menú
+    setDropdownOpen(!isDropdownOpen); 
   };
 
   return (

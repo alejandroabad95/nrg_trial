@@ -1,5 +1,5 @@
 import React from 'react';
-import PrincipalsRow from './PrincipalsRow'; // Asegúrate de que la ruta sea correcta
+import PrincipalsRow from './PrincipalsRow'; 
 
 interface Principal {
   id: string;
@@ -9,7 +9,7 @@ interface Principal {
 
 interface PrincipalsTableProps {
   principals: Principal[];
-  translations: Record<string, string>; // Añadido para recibir las traducciones
+  translations: Record<string, string>; 
 }
 
 const PrincipalsTable: React.FC<PrincipalsTableProps> = ({ principals, translations }) => {

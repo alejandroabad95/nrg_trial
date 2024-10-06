@@ -10,7 +10,7 @@ interface Counterparty {
 
 interface CounterpartiesTableProps {
   counterparties: Counterparty[];
-  translations: { [key: string]: string }; // Agrega el tipo para las traducciones
+  translations: { [key: string]: string };
 }
 
 const CounterpartiesTable: React.FC<CounterpartiesTableProps> = ({ counterparties, translations }) => {
@@ -18,9 +18,9 @@ const CounterpartiesTable: React.FC<CounterpartiesTableProps> = ({ counterpartie
     <table>
       <thead>
         <tr>
-          <th>ID</th> {/* Sin traducción */}
-          <th>{translations.name}</th> {/* Traducción para Nombre */}
-          <th>{translations.type}</th> {/* Traducción para Tipo */}
+          <th>ID</th> 
+          <th>{translations.name}</th> 
+          <th>{translations.type}</th> 
         </tr>
       </thead>
       <tbody>

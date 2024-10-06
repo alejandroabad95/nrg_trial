@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from 'react';
 import { getSession } from 'next-auth/react';
 import CounterpartiesTable from '../components/CounterpartiesTable';

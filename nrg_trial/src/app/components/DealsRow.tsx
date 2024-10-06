@@ -1,5 +1,4 @@
-'use client'; // Asegúrate de que este componente sea un cliente
-
+'use client'; 
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -16,7 +15,7 @@ interface Deal {
 
 interface DealsRowProps {
   deal: Deal;
-  translations: Record<string, string>; // Añadido para recibir las traducciones
+  translations: Record<string, string>; 
 }
 
 const DealsRow: React.FC<DealsRowProps> = ({ deal, translations }) => {
@@ -39,13 +38,9 @@ const DealsRow: React.FC<DealsRowProps> = ({ deal, translations }) => {
 
   return (
     <tr>
-      {/* <td onClick={handleRowClick}>{deal.id}</td> */}
-
       <td className='' onClick={() => handleRowClick()}>
         <span className=''>{deal.id}</span>
       </td>
-
-      
       <td>{deal.code}</td>
       <td>{new Date(deal.trade_date).toLocaleDateString()}</td>
       <td>{statusLabels[deal.status]}</td>

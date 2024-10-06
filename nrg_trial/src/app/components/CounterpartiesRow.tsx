@@ -1,5 +1,4 @@
-"use client"; // Asegúrate de que este componente sea un cliente
-
+"use client"; 
 import React from 'react';
 
 interface Counterparty {
@@ -10,14 +9,14 @@ interface Counterparty {
 
 interface CounterpartiesRowProps {
   counterparty: Counterparty;
-  translations: { [key: string]: string }; // Agregar el tipo para las traducciones
+  translations: { [key: string]: string }; 
 }
 
 const CounterpartiesRow: React.FC<CounterpartiesRowProps> = ({ counterparty, translations }) => {
   const typeLabels: { [key: number]: string } = {
-    1: translations.typeLabels?.["1"] || "Client", // Valor por defecto
-    2: translations.typeLabels?.["2"] || "Market", // Valor por defecto
-    3: translations.typeLabels?.["3"] || "OTC", // Valor por defecto
+    1: translations.typeLabels?.["1"] || "Client", 
+    2: translations.typeLabels?.["2"] || "Market", 
+    3: translations.typeLabels?.["3"] || "OTC", 
   };
 
   return (

@@ -1,9 +1,7 @@
 "use client"; // Marca el archivo como un componente de cliente
-
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { changePassword } from '../services/auth';
-
 import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
 import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
 
@@ -11,11 +9,9 @@ const ChangePassword = () => {
   const { data: session } = useSession(); // Obtener la sesión para acceder al token
   const { currentLang } = useLanguage(); // Obtén el idioma actual
   const translations = useTranslations(currentLang); // Obtén las traducciones
-
   const [newPassword, setNewPassword] = useState('');
   const [error, setError] = useState('');
   const [succes, setSucces] = useState('');
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

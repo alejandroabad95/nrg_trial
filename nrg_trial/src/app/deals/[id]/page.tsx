@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'; // Importamos useRouter
+import { useRouter } from 'next/navigation'; 
 import { getSession } from 'next-auth/react';
 import { useLanguage } from '@/app/context/LanguageContext';
 import { useTranslations } from '../../../utils/i18n'; 
@@ -34,16 +34,15 @@ interface Deal {
 
 interface DealDetailsPageProps {
   params: {
-    id: string; // Definimos que 'id' será un string
+    id: string;
   };
 }
 
 export default function DealDetailsPage({ params }: DealDetailsPageProps) {
-  const { currentLang } = useLanguage(); // Obtén el idioma actual
-  const translations = useTranslations(currentLang); // Obtén las traducciones
-  const router = useRouter(); // Inicializa el router para la navegación
-
-  const { id } = params; // Obtiene el ID del deal desde las props
+  const { currentLang } = useLanguage(); 
+  const translations = useTranslations(currentLang); 
+  const router = useRouter(); 
+  const { id } = params;
   const [deal, setDeal] = useState<Deal | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -77,23 +76,15 @@ export default function DealDetailsPage({ params }: DealDetailsPageProps) {
     };
 
     fetchDeal();
-  }, [id, translations]); // Asegúrate de que las traducciones se actualicen al cambiar el idioma
+  }, [id, translations]); 
 
   return (
-
-      <>
-
-      
-
-
+    <>
     <div className="m-20">
         
       <button onClick={() => router.back()} className={`${styles.goBackButton}`} >
         ⬅️ {translations.goBack}
       </button>
-
-
-
       <h1>{translations.dealDetails}</h1>
 
       {loading ? (
@@ -135,7 +126,6 @@ export default function DealDetailsPage({ params }: DealDetailsPageProps) {
         </div>
       )}
       </div>
-      
     </>
   );
 }

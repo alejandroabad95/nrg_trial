@@ -1,13 +1,12 @@
-"use client"; // Asegúrate de que este archivo sea un componente de cliente
-
+"use client"; 
 import React from 'react';
-import { useLanguage } from '../context/LanguageContext'; // Importa el hook de lenguaje
-import { useTranslations } from '../../utils/i18n'; // Importa el hook de traducciones
+import { useLanguage } from '../context/LanguageContext'; 
+import { useTranslations } from '../../utils/i18n'; 
 
 
 const Footer = () => {
-  const { currentLang } = useLanguage(); // Obtiene el idioma actual desde el contexto
-  const translations = useTranslations(currentLang); // Obtiene las traducciones según el idioma actual
+  const { currentLang } = useLanguage(); 
+  const translations = useTranslations(currentLang); 
 
   return (
     <footer className='p-auto text-center'>

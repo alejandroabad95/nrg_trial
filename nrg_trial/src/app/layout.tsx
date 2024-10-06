@@ -1,18 +1,15 @@
 "use client"; // Esto marca el archivo como un Client Component
 import "./styles/globals.scss";
 import { SessionProvider } from "next-auth/react";
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { LanguageProvider } from '../app/context/LanguageContext'; // Importa el LanguageProvider
 import { Nunito, Raleway } from 'next/font/google';
 
-
 // Cargar las fuentes
 const nunito = Nunito({
   subsets: ['latin'],
 });
-
 const raleway = Raleway({
   subsets: ['latin'],
 });

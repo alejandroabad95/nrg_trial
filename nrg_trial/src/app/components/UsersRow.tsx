@@ -10,7 +10,7 @@ interface User {
 
 interface UsersRowProps {
   user: User;
-  translations: Record<string, string>; // Añadido para recibir las traducciones
+  translations: Record<string, string>; 
 }
 
 const UsersRow: React.FC<UsersRowProps> = ({ user, translations }) => {

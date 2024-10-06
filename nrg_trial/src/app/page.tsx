@@ -1,5 +1,4 @@
 "use client";
-
 import { useTranslations } from '../utils/i18n';
 import { useLanguage } from './context/LanguageContext';
 import { useEffect, useState } from 'react';
